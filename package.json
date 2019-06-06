@@ -4,14 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "egg-bin dev"
+    "dev": "next",
+    "build": "cross-env NODE_ENV=production && next build",
+    "start": "cross-env NODE_ENV=production && next start"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "egg": "^2.22.2"
+    "next": "^8.1.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
-    "egg-bin": "^4.13.0"
+    "cross-env": "^5.2.0"
   }
 }
