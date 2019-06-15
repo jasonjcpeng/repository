@@ -3,3 +3,4 @@ logs
 run
 .next
 dist
+package-tmp.json
