@@ -15,6 +15,7 @@ if [ $? == 0 ]; then
 else
     echo "package.json different as last time"
     npm i
+    npm audit fix
     cp -f ${package} ${packageTmp}
 fi
 
