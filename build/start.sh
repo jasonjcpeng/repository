@@ -21,3 +21,14 @@ fi
 
 #Step.3 开始打包
 npm run build
+
+
+#Step.4 启动或重启服务
+isOnline=$(npx pm2 list | grep "online")
+if [[ $isOnline != "" ]]
+then
+    npm run reload
+else
+    npm run start
+fi
+
