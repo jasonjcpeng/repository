@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx nodemon --watch server ./server/app.js",
+    "dev": "cross-env NODE_ENV=development npx nodemon --watch server ./server/app.js",
     "build": "next build",
     "export": "next export",
     "start": "cross-env NODE_ENV=production npx pm2 start",

@@ -8,6 +8,7 @@ class homedir extends React.Component {
     }
 
     static async getInitialProps(ctx){
+        console.log('----------------------->',ctx.query);
         const res = await fetch.get('http://image.9game.cn/2017/11/24/18667950_.png');
         return {status:res.status};
     }
