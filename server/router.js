@@ -1,19 +1,23 @@
-module.exports = function ({ app, KoaRouter }) {
-    const handle = app.getRequestHandler()
+const Router = require('koa-router');
 
-    KoaRouter.get('/', async (ctx) => {
+module.exports = function (app) {
+    const handle = app.getRequestHandler();
+    const router = new Router();
+
+    router.get('/', async (ctx) => {
         await ctx.renderSSR('/index');
     })
 
-    KoaRouter.get('/about', async (ctx) => {
+    router.get('/about', async (ctx) => {
         await ctx.renderSSR('/about');
     })
 
-    KoaRouter.get('/home', async (ctx) => {
+    router.get('/home', async (ctx) => {
         await ctx.renderSSR('/home');
     })
 
-    KoaRouter.get('*', async (ctx) => {
+    router.get('*', async (ctx,next) => {
         await handle(ctx.req, ctx.res)
     })
+    return router.routes();
 }
