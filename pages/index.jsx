@@ -1,4 +1,7 @@
 import React from 'react';
+import Head from './components/header';
+
+import getConfig from 'next/config'
 import { withRouter } from 'next/router';
 import fetch from 'axios';
 import Link from 'next/link'
@@ -8,8 +11,8 @@ class homedir extends React.Component {
     }
 
     static async getInitialProps(ctx){
-        console.log('----------------------->',ctx.query);
-        const res = await fetch.get('http://image.9game.cn/2017/11/24/18667950_.png');
+        const {server} = getConfig().publicRuntimeConfig;
+        const res = await fetch.get(`${server}/api/follow`);
         return {status:res.status};
     }
     
@@ -20,7 +23,7 @@ class homedir extends React.Component {
     
     render() {
         return <div>
-            <Header></Header>
+            <Head></Head>
             status:{this.props.status}
             <Link href="/about"><p>Link to about</p></Link>
             <p onClick={()=>{this.props.router.push('/about')}}>to about</p>

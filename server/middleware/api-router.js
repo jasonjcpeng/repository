@@ -19,20 +19,20 @@ function modifyRequest(reqObj) {
     for (let i in reqObj) {
         switch (reqObj[i].method.toUpperCase()) {
             case 'POST':
-                Router.post(reqObj[i].url, reqObj[i].do);
+                Router.post(i, reqObj[i].do);
                 break;
             case 'PUT':
-                Router.put(reqObj[i].url, reqObj[i].do);
+                Router.put(i, reqObj[i].do);
                 break;
             case 'DEL':
-                Router.del(reqObj[i].url, reqObj[i].do);
+                Router.del(i, reqObj[i].do);
                 break;
             case 'ALL':
-                Router.all(reqObj[i].url, reqObj[i].do);
+                Router.all(i, reqObj[i].do);
                 break;
             case 'GET':
             default:
-                Router.get(reqObj[i].url, reqObj[i].do);
+                Router.get(i, reqObj[i].do);
                 break;
         }
     }
