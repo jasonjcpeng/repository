@@ -1,9 +1,8 @@
 import React from 'react';
 import Head from './components/header';
 
-import getConfig from 'next/config'
 import { withRouter } from 'next/router';
-import fetch from 'axios';
+import {fetchLocal} from './lib/fetch';
 import Link from 'next/link'
 class homedir extends React.Component {
     constructor() {
@@ -11,8 +10,7 @@ class homedir extends React.Component {
     }
 
     static async getInitialProps(ctx){
-        const {server} = getConfig().publicRuntimeConfig;
-        const res = await fetch.get(`${server}/api/follow`);
+        const res = await fetchLocal.get('/api/follow');
         return {status:res.status};
     }
     

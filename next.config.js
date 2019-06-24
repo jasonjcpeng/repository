@@ -1,4 +1,5 @@
 const NODE_ENV = process.env.NODE_ENV;
+const globalConfig = require('./config/config');
 const withSass = require('@zeit/next-sass');
 
 module.exports = withSass({
@@ -9,6 +10,6 @@ module.exports = withSass({
 
     },
     publicRuntimeConfig:{
-        server:'http://localhost:3000'
+        ...globalConfig
     }
 })
