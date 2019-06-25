@@ -1,0 +1,8 @@
+@import '../../components/styles/base.scss';
+
+p{
+    font-size: r(36);
+    color:red;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

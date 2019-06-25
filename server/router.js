@@ -6,7 +6,7 @@ module.exports = function (app) {
     const handle = app.getRequestHandler();
     const router = new Router();
 
-    router.get('/', async (ctx) => {
+    router.get('/', async (ctx,next) => {
         await ctx.renderSSR('/index');
     })
 

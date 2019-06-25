@@ -1,0 +1,17 @@
+@function r($args) {
+  @return ($args/100)+rem;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+img {
+  border: none;
+  display: block;
+}
+.rtl {
+  direction: rtl;
+}
