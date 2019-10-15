@@ -1,8 +1,10 @@
-@import '../../components/styles/base.scss';
+@import "../_common/styles/util.scss";
 
-p{
+.root {
+  p {
     font-size: r(36);
-    color:red;
+    color: red;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
 }
