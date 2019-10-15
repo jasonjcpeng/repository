@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'next/router';
+import entry from '@entry';
 import Link from 'next/link'
 
 import styles from './style.scss';
@@ -18,4 +18,4 @@ class about extends React.Component {
   }
 }
 
-export default withRouter(about);
+export default entry()(about);

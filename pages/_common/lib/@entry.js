@@ -10,13 +10,14 @@ import React from 'react';
 
 export default (args) => {
   return (Components) => {
+    const { title } = args || {};
     class Container extends React.Component {
       constructor() {
         super();
       }
 
       render() {
-        return <Layout title={args.title || ''}>
+        return <Layout title={title || ''}>
           <Components {...this.props} ></Components>
         </Layout>
       }

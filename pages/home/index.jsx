@@ -1,9 +1,9 @@
 import React from 'react';
-import { withRouter } from 'next/router'
+import entry from '@entry';
 
 import styles from './style.scss';
 
-class Index extends React.Component {
+class Home extends React.Component {
   constructor() {
     super();
   }
@@ -12,4 +12,4 @@ class Index extends React.Component {
   }
 }
 
-export default withRouter(Index);
+export default entry()(Home);
