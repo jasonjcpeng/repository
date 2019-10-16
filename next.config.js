@@ -2,6 +2,7 @@ const NODE_ENV = process.env.NODE_ENV;
 const globalConfig = require('./config/config');
 const withSass = require('@zeit/next-sass');
 const path = require("path");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = withSass({
   // assetPrefix: NODE_ENV==='production' ? 'https://cdn.mydomain.com' : '',\
@@ -20,16 +21,16 @@ module.exports = withSass({
   },
   // useFileSystemPublicRoutes: false,
   webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
-    // console.log(defaultLoaders);
     addPostCss(config.module.rules)
     addResolve(config);
     return config
   },
 })
 
-function addResolve(config) {
+const addResolve = function (config) {
   config.resolve = {
     alias: {
+      ...config.resolve.alias,
       "@common": path.resolve(__dirname, "pages/_common"),
       "@components": path.resolve(__dirname, "pages/_common/components"),
     },
@@ -41,7 +42,7 @@ function addResolve(config) {
   }
 }
 
-function addPostCss(rules) {
+const addPostCss = function (rules) {
   rules.push({
     test: /\.css$/,
     exclude: /node_modules/,
