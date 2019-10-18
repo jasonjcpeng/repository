@@ -2,6 +2,7 @@ const Koa = require('koa');
 const next = require('next');
 const compression = require('compression');
 const koaConnect = require('koa-connect');
+const bodyParser = require('koa-bodyparser');
 const static = require('koa-static');
 
 const renderSSR = require('./middleware/render-ssr');
@@ -14,11 +15,11 @@ const app = next({ dev });
 app.prepare().then(() => {
   const config = require('next/config').default().publicRuntimeConfig; // 获取next的公共配置文件
   const server = new Koa();
-
   server.use(renderSSR(app))
     .use(koaConnect(compression())) //gzip压缩
-    .use(mergeConfig(config)) // 合并配置文件
+    .use(mergeConfig(config)) // 合并配置文件到ctx
     .use(static('static/'))  // 静态目录
+    .use(bodyParser({ jsonLimit: false }))
     .use(Router(app))  // 启用路由中间件
     .listen(config.port, () => {
       console.log(`> Ready on http://localhost:${config.port}`)

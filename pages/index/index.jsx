@@ -19,11 +19,19 @@ class homedir extends React.Component {
   // }
 
   getFollowStatus = () => {
-    Post('/follow/post', {
+    // Post('/follow/post', {
+    //   args1: 1
+    // }).then(res => {
+    //   this.setState({
+    //     followStatus: JSON.stringify(res.cc)
+    //   })
+    // });
+
+    Get('/follow/get', {
       args1: 1
     }).then(res => {
       this.setState({
-        followStatus: res.data
+        followStatus: JSON.stringify(res)
       })
     });
   }

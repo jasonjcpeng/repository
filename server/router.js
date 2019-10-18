@@ -18,7 +18,7 @@ module.exports = function (app) {
     await ctx.renderSSR('/home');
   })
 
-  router.use('/api', Api(path.resolve(__dirname, './api')));
+  router.use('/api', Api(path.resolve(__dirname, './api'), app));
 
   router.get('*', async (ctx) => {
     await handle(ctx.req, ctx.res)

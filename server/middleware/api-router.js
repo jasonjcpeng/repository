@@ -1,7 +1,57 @@
 const Router = require('koa-router')();
 const fs = require('fs');
+const Crypto = require('../lib/CryptoJS');
 
-module.exports = function (dirname) {
+
+module.exports = function (dirname, app) {
+  const catchRouterCrypto = (toDo) => {
+    const config = app.nextConfig.publicRuntimeConfig;
+    const { Encrypt, Decrypt } = Crypto(config.cryptoKey);
+    return async function (ctx, next) {
+      if (ctx.request.body.CryptoData) {
+        ctx.request.body = JSON.parse(Decrypt(ctx.request.body.CryptoData));
+      }
+      toDo(ctx);
+      if (typeof ctx.body !== 'object') {
+        const errorMsg = '[api-router]ctx.body response must be a Object';
+        console.error(errorMsg);
+        ctx.status = 500;
+        ctx.body = errorMsg;
+      } else {
+        ctx.body = JSON.stringify({ CryptoData: Encrypt(JSON.stringify(ctx.body)) });
+      }
+    }
+  }
+
+  const modifyRequest = function (req, value) {
+    if (!(req instanceof Array)) {
+      console.error('[Api Router] Api file must export a Array');
+      return;
+    }
+    const rootDir = value.toLowerCase().replace('.js', '');
+    req.forEach(element => {
+      const url = `/${rootDir}${element.url}`
+      switch (element.method.toUpperCase()) {
+        case 'POST':
+          Router.post(url, catchRouterCrypto(element.do));
+          break;
+        case 'PUT':
+          Router.put(url, catchRouterCrypto(element.do));
+          break;
+        case 'DEL':
+          Router.del(url, catchRouterCrypto(element.do));
+          break;
+        case 'ALL':
+          Router.all(url, catchRouterCrypto(element.do));
+          break;
+        case 'GET':
+        default:
+          Router.get(url, catchRouterCrypto(element.do));
+          break;
+      }
+    });
+  }
+
   fs.readdirSync(dirname).filter((value) => {
     return value !== 'index.js';//过滤自身
   }).forEach(value => {
@@ -9,40 +59,4 @@ module.exports = function (dirname) {
   });
 
   return Router.routes();
-}
-
-function modifyRequest(req, value) {
-  if (!(req instanceof Array)) {
-    console.error('[Api Router] Api file must export a Array');
-    return;
-  }
-  const rootDir = value.toLowerCase().replace('.js', '');
-  req.forEach(element => {
-    const url = `/${rootDir}${element.url}`
-    switch (element.method.toUpperCase()) {
-      case 'POST':
-        Router.post(url, catchRouterDo(element.do));
-        break;
-      case 'PUT':
-        Router.put(url, catchRouterDo(element.do));
-        break;
-      case 'DEL':
-        Router.del(url, catchRouterDo(element.do));
-        break;
-      case 'ALL':
-        Router.all(url, catchRouterDo(element.do));
-        break;
-      case 'GET':
-      default:
-        Router.get(url, catchRouterDo(element.do));
-        break;
-    }
-  });
-}
-
-const catchRouterDo = (toDo) => {
-  return async function (ctx, next) {
-    toDo(ctx);
-    next();
-  }
 }
