@@ -12,6 +12,8 @@ const Router = require('./router');
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 
+
+
 app.prepare().then(() => {
   const config = require('next/config').default().publicRuntimeConfig; // 获取next的公共配置文件
   const server = new Koa();

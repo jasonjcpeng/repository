@@ -6,10 +6,11 @@ const Crypto = require('../lib/CryptoJS');
 module.exports = function (dirname, app) {
   const catchRouterCrypto = (toDo) => {
     const config = app.nextConfig.publicRuntimeConfig;
-    const { Encrypt, Decrypt } = Crypto(config.cryptoKey);
+    const Cryptor = Crypto(config);
+
     return async function (ctx, next) {
       if (ctx.request.body.CryptoData) {
-        ctx.request.body = JSON.parse(Decrypt(ctx.request.body.CryptoData));
+        ctx.request.body = Cryptor.Decrypt(ctx.request.body.CryptoData);
       }
       toDo(ctx);
       if (typeof ctx.body !== 'object') {
@@ -18,7 +19,7 @@ module.exports = function (dirname, app) {
         ctx.status = 500;
         ctx.body = errorMsg;
       } else {
-        ctx.body = JSON.stringify({ CryptoData: Encrypt(JSON.stringify(ctx.body)) });
+        ctx.body = { CryptoData: Cryptor.Encrypt(ctx.body) };
       }
     }
   }

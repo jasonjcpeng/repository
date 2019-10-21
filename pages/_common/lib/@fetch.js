@@ -4,13 +4,7 @@ import Crypto from './CryptoJS';
 
 
 const config = getConfig().publicRuntimeConfig;
-const Cryptor = Crypto(config.cryptoKey);
-const Encrypt = function (data) {
-  return Cryptor.Encrypt(JSON.stringify(data));
-}
-const Decrypt = function (text) {
-  return JSON.parse(Cryptor.Decrypt(text));
-}
+
 
 const fetch = axios.create({
   baseURL: `${config.server}/api`,
@@ -21,13 +15,13 @@ const fetch = axios.create({
 
 export const Get = async (url, data) => {
   const response = await fetch.get(`${url}`, { params: { ...data } })
-  return Decrypt(response.data.CryptoData);
+  return Crypto.Decrypt(response.data.CryptoData);
 }
 
 export const Post = async (url, data) => {
   const req = { ...data };
-  const response = await fetch.post(`${url}`, { CryptoData: Encrypt(req) });
-  return Decrypt(response.data.CryptoData);
+  const response = await fetch.post(`${url}`, { CryptoData: Crypto.Encrypt(req) });
+  return Crypto.Decrypt(response.data.CryptoData);
 }
 
 

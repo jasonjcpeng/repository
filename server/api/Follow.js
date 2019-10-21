@@ -3,14 +3,14 @@ module.exports = [
     url: '/get',
     method: 'get',
     do: async function (ctx) {
-      ctx.body = '123';
+      ctx.body = { cc: "get" };
     }
   },
   {
     url: '/post',
     method: 'post',
     do: async function (ctx) {
-      ctx.body = { cc: 123 };
+      ctx.body = { cc: 'post' };
     }
   }
 ]

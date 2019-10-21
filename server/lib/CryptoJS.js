@@ -99,21 +99,29 @@ CryptoJS.lib.Cipher || function (u) {
 })();
 
 
-module.exports = function (_key) {
-  const key = CryptoJS.enc.Utf8.parse(_key);
-  const iv = CryptoJS.enc.Utf8.parse(_key);
+module.exports = function (config) {
+  const key = CryptoJS.enc.Utf8.parse(config.cryptoKey);
+  const iv = CryptoJS.enc.Utf8.parse(config.cryptoKey);
   return {
-    Encrypt: function (word) {
+    encrypt: function (word) {
       var srcs = CryptoJS.enc.Utf8.parse(word);
       var encrypted = CryptoJS.AES.encrypt(srcs, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
       return encrypted.ciphertext.toString().toUpperCase();
     },
-    Decrypt: function (word) {
+    decrypt: function (word) {
       var encryptedHexStr = CryptoJS.enc.Hex.parse(word);
       var srcs = CryptoJS.enc.Base64.stringify(encryptedHexStr);
       var decrypt = CryptoJS.AES.decrypt(srcs, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
       var decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
       return decryptedStr.toString();
+    },
+    Encrypt: function (data) {
+      if (config.NODE_ENV === 'production') return this.encrypt(JSON.stringify(data));
+      return data;
+    },
+    Decrypt: function (text) {
+      if (config.NODE_ENV === 'production') return JSON.parse(this.decrypt(text))
+      return text;
     }
   }
-}
+};
