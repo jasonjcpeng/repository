@@ -16,6 +16,11 @@ export default (args) => {
         super();
       }
 
+      static async getInitialProps(ctx) {
+        return await Components.getInitialProps(ctx);
+      }
+
+
       render() {
         return <Layout title={title || ''}>
           <Components {...this.props} ></Components>

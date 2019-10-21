@@ -103,8 +103,8 @@ CryptoJS.lib.Cipher || function (u) {
 
 module.exports = (function () {
   const config = getConfig().publicRuntimeConfig;
-  const key = CryptoJS.enc.Utf8.parse(config.cryptoKey);
-  const iv = CryptoJS.enc.Utf8.parse(config.cryptoKey);
+  const key = CryptoJS.enc.Utf8.parse(config.ck);
+  const iv = CryptoJS.enc.Utf8.parse(config.ck);
   return {
     encrypt: function (word) {
       var srcs = CryptoJS.enc.Utf8.parse(word);
