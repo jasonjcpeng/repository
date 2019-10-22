@@ -10,7 +10,8 @@ module.exports = {
     merge_logs: true,
     output: './logs/pm2/out.log',
     error: './logs/pm2/error.log',
-    log: './logs/pm2/combined.log.log',
+    log: './logs/pm2/combined.log',
+    instance_var: "INSTANCE_ID", // 添加这一行
     env: {
       NODE_ENV: 'production'
     }

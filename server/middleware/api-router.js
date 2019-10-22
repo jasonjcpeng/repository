@@ -21,6 +21,7 @@ module.exports = function (dirname, app) {
       } else {
         ctx.body = { CryptoData: Cryptor.Encrypt(ctx.body) };
       }
+      ctx.response.body = ctx.body;
     }
   }
 

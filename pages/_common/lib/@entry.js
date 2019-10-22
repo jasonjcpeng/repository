@@ -17,7 +17,7 @@ export default (args) => {
       }
 
       static async getInitialProps(ctx) {
-        return await Components.getInitialProps(ctx);
+        return await Components.getInitialProps ? Components.getInitialProps(ctx) : {};
       }
 
 

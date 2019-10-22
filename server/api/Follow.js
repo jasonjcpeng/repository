@@ -3,7 +3,7 @@ module.exports = [
     url: '/get',
     method: 'get',
     do: async function (ctx) {
-      ctx.body = { cc: "get" };
+      ctx.body = 123;
     }
   },
   {
