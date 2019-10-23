@@ -37,5 +37,4 @@ app.prepare().then(() => {
     .listen(config.port, () => {
       console.log(`> Ready on ${config.server}`)
     });
-
 })

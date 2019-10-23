@@ -8,9 +8,9 @@ module.exports = {
     autorestart: true,
     max_memory_restart: '1G',
     merge_logs: true,
-    output: './logs/pm2/out.log',
-    error: './logs/pm2/error.log',
-    log: './logs/pm2/combined.log',
+    output: './logs/terminal/out.log',
+    error: './logs/terminal/error.log',
+    log: './logs/terminal/combined.log',
     instance_var: "INSTANCE_ID", // 添加这一行
     env: {
       NODE_ENV: 'production'
