@@ -9,8 +9,8 @@ module.exports = function (dirname, app) {
     const Cryptor = Crypto(config);
 
     return async function (ctx, next) {
-      if (ctx.request.body.CryptoData) {
-        ctx.request.body = Cryptor.Decrypt(ctx.request.body.CryptoData);
+      if (ctx.request.body.cryptodata) {
+        ctx.request.body = Cryptor.Decrypt(ctx.request.body.cryptodata);
       }
       toDo(ctx);
       if (typeof ctx.body !== 'object') {
@@ -19,9 +19,8 @@ module.exports = function (dirname, app) {
         ctx.status = 500;
         ctx.body = errorMsg;
       } else {
-        ctx.body = { CryptoData: Cryptor.Encrypt(ctx.body) };
+        ctx.body = { cryptodata: Cryptor.Encrypt(ctx.body) };
       }
-      ctx.response.body = ctx.body;
     }
   }
 
