@@ -35,7 +35,7 @@ app.prepare().then(() => {
     .use(static('static/'))  // 静态目录
     .use(Router(app))  // 路由中间件
     .listen(config.port, () => {
-      console.log(`> Ready on http://localhost:${config.port}`)
+      console.log(`> Ready on ${config.server}`)
     });
 
 })
