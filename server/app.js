@@ -15,7 +15,7 @@ const devlog = require('./middleware/devLog')
 const ApiRouter = require('./middleware/api-router-interface');
 const Router = require('./router');
 
-const dev = process.env.NODE_ENV !== 'production';
+const dev = process.env.NODE_ENV === 'development';
 const app = next({ dev });
 
 

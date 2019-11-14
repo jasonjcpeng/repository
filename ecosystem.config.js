@@ -11,7 +11,7 @@ module.exports = {
     output: './logs/terminal/out.log',
     error: './logs/terminal/error.log',
     log: './logs/terminal/combined.log',
-    instance_var: "INSTANCE_ID", // 添加这一行
+    instance_var: "INSTANCE_ID",
     env: {
       NODE_ENV: process.env.NODE_ENV
     }
