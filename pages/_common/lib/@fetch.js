@@ -15,13 +15,13 @@ const fetch = axios.create({
 
 export const Get = async (url, data) => {
   const response = await fetch.get(`${url}`, { params: { ...data } })
-  return Crypto.Decrypt(response.data.cryptodata);
+  return Crypto.Decrypt(response.data.body);
 }
 
 export const Post = async (url, data) => {
   const req = { ...data };
-  const response = await fetch.post(`${url}`, { cryptodata: Crypto.Encrypt(req) });
-  return Crypto.Decrypt(response.data.cryptodata);
+  const response = await fetch.post(`${url}`, { body: Crypto.Encrypt(req) });
+  return Crypto.Decrypt(response.data.body);
 }
 
 

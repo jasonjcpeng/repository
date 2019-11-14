@@ -7,7 +7,7 @@ module.exports = function () {
     const config = ctx.config;
     const Cryptor = Crypto(config);
     if (ctx.request.url.match('/api/')) {
-      const data = { request: { body: ctx.request.body, pass: ctx.request }, response: { body: ctx.body.cryptodata ? Cryptor.Decrypt(ctx.body.cryptodata) : ctx.body, pass: ctx.response } }
+      const data = { request: { body: ctx.request.body, pass: ctx.request }, response: { body: ctx.body.body ? Cryptor.Decrypt(ctx.body.body) : ctx.body, pass: ctx.response } }
       if (ctx.response.status > 299) {
         ctx.log.errorLog.error(JSON.stringify(data));
       } else {

@@ -5,7 +5,7 @@ module.exports = {
   devLogSwitch: true,
   NODE_ENV: process.env.NODE_ENV,
   port, // 本地服务端口
-  server: env !== 'production' ? `http://localhost:${port}` : '0.0.0.0', //本地服务host
+  server: env !== 'production' ? `http://localhost:${port}` : `http://127.0.0.1:${port}`, //本地服务host
   ck: 'AAAAAAAAAAAAAAAA', // 请求加密Key,12位字符以上
   MSG: {
 

@@ -36,6 +36,7 @@ log4js.configure({
     default: { appenders: ['responseLog', 'errorLog',], level: 'trace' }
   },
   pm2: true,
+  disableClustering: true,
   pm2InstanceVar: 'INSTANCE_ID',
 });
 

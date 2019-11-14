@@ -13,12 +13,12 @@ class homedir extends React.Component {
     }
   }
 
-  // static async getInitialProps(ctx) {
-  //   const res = await Post('/follow/post', {
-  //     args1: 'asdf'
-  //   });
-  //   return { followStatus: res.cc };
-  // }
+  static async getInitialProps(ctx) {
+    const res = await Post('/follow/post', {
+      args1: 'asdf'
+    });
+    return { followStatus: res.cc };
+  }
 
   getFollowStatus = () => {
     // Post('/follow/post', {
@@ -33,7 +33,7 @@ class homedir extends React.Component {
       args1: 'asdf'
     }).then(res => {
       this.setState({
-        followStatus: res.cc
+        followStatus: res.aa
       })
     });
   }
