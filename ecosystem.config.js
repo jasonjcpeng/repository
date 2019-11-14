@@ -13,7 +13,7 @@ module.exports = {
     log: './logs/terminal/combined.log',
     instance_var: "INSTANCE_ID", // 添加这一行
     env: {
-      NODE_ENV: 'production'
+      NODE_ENV: process.env.NODE_ENV
     }
   }],
 };

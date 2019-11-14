@@ -5,13 +5,16 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development npx nodemon --watch server ./server/app.js",
-    "build": "next build",
+    "build": "cross-env NODE_ENV=production npx next build",
+    "build:test": "cross-env NODE_ENV=test npx next build",
     "export": "next export",
     "start": "cross-env NODE_ENV=production npx pm2 start",
+    "start:test": "cross-env NODE_ENV=test npx pm2 start",
     "reload": "npx pm2 reload all",
     "restart": "npx pm2 restart all",
     "stop": "npx pm2 stop all",
     "delete": "npx pm2 delete all",
+    "dist:test": "sh build/start4test.sh",
     "dist": "sh build/start.sh"
   },
   "author": "",

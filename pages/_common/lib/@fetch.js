@@ -7,7 +7,7 @@ const config = getConfig().publicRuntimeConfig;
 
 
 const fetch = axios.create({
-  baseURL: `${config.server}/api`,
+  baseURL: `${config.host}/api`,
   timeout: 1000,
   headers: { 'content-type': 'application/json' },
 });
