@@ -1,6 +1,4 @@
 const Router = require('koa-router');
-const Api = require('./middleware/api-router');
-const path = require('path');
 
 module.exports = function (app) {
   const handle = app.getRequestHandler();
