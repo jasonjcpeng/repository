@@ -3,14 +3,16 @@ module.exports = [
     url: '/get',
     method: 'get',
     do: async function (ctx) {
-      ctx.body = { aa: 'asdf' };
+      const { args1 } = ctx.query;
+      ctx.body = { result: `${args1} World` };
     }
   },
   {
     url: '/post',
     method: 'post',
     do: async function (ctx) {
-      ctx.body = { cc: 'post' };
+      const { args1 } = ctx.request.body;
+      ctx.body = { result: `${args1} World` };
     }
   }
 ]

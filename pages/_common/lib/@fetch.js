@@ -4,10 +4,10 @@ import Crypto from './CryptoJS';
 
 
 const config = getConfig().publicRuntimeConfig;
-
+const isBrowers = typeof window !== 'undefined';
 
 const fetch = axios.create({
-  baseURL: `${config.host}/api`,
+  baseURL: `${isBrowers ? config.host : config.SSRHost}/api`,
   timeout: 1000,
   headers: { 'content-type': 'application/json' },
 });

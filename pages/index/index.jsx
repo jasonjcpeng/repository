@@ -15,25 +15,18 @@ class homedir extends React.Component {
 
   static async getInitialProps(ctx) {
     const res = await Post('/follow/post', {
-      args1: 'asdf'
+      args1: '[POST]Hello'
     });
-    return { followStatus: res.cc };
+    return { followStatus: res.result };
   }
 
   getFollowStatus = () => {
-    // Post('/follow/post', {
-    //   args1: 'asdf'
-    // }).then(res => {
-    //   this.setState({
-    //     followStatus: res.cc
-    //   })
-    // });
 
     Get('/follow/get', {
-      args1: 'asdf'
+      args1: '[GET]Hello'
     }).then(res => {
       this.setState({
-        followStatus: res.aa
+        followStatus: res.result
       })
     });
   }
