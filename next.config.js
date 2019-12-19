@@ -1,4 +1,5 @@
 const NODE_ENV = process.env.NODE_ENV;
+const childProcess = require('child_process');
 const globalConfig = require('./config/config');
 const withSass = require('@zeit/next-sass');
 const path = require("path");
@@ -8,6 +9,17 @@ module.exports = withSass({
   useFileSystemPublicRoutes: false,
   distDir: 'dist',
   cssModules: true,
+  generateBuildId: async () => {
+    // For example get the latest git commit hash here
+    return await new Promise((res, rej) => {
+      childProcess.exec('git rev-parse HEAD', function (err, stdout) {
+        if (err) {
+          rej(err)
+        }
+        res(stdout);
+      });
+    })
+  },
   cssLoaderOptions: {
     importLoaders: 1,
     localIdentName: "[local]___[hash:base64:5]",
